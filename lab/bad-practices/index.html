@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS Animation BAD PRACTICES</title>
+    <link rel="stylesheet" href="styles.css">
+
+</head>
+
+<body>
+    <div class="warning">
+        <h2>⚠️ WARNING: BAD PRACTICES DEMO ⚠️</h2>
+        <p>These animations demonstrate what NOT to do. They may cause eye strain, poor performance, and accessibility
+            issues!</p>
+    </div>
+
+    <div class="container">
+        <!-- BAD PRACTICE CARD 1 -->
+        <div class="bad-card-1">
+            <h2>Performance Killer</h2>
+            <p>This card animates width, height, left, top, border-width, and background-color - all expensive
+                properties that cause layout recalculations!</p>
+            <p>Hover over me to see even worse performance issues!</p>
+        </div>
+
+        <!-- BAD PRACTICE CARD 2 -->
+        <div class="bad-card-2">
+            <h2>Accessibility Nightmare</h2>
+            <p class="unreadable-text">
+                This text is constantly moving and scaling, making it impossible to read.
+                The flashing background could trigger seizures!
+            </p>
+            <button class="evil-button">Try to Click Me!</button>
+        </div>
+    </div>
+
+    <div class="problem-list">
+        <h4>🚫 BAD PRACTICES DEMONSTRATED:</h4>
+        <ul>
+            <li><strong>Performance Issues:</strong> Animating width, height, left, top, border-width (causes
+                repaints/reflows)</li>
+            <li><strong>Too Long Durations:</strong> 5-second transitions are painfully slow</li>
+            <li><strong>Seizure Risk:</strong> Rapid flashing at 0.1s intervals can trigger photosensitive epilepsy</li>
+            <li><strong>Usability Problems:</strong> Button that moves away from cursor, unreadable moving text</li>
+            <li><strong>No Accessibility:</strong> Missing prefers-reduced-motion media query</li>
+            <li><strong>Infinite Annoyance:</strong> Animations that never stop disrupting content consumption</li>
+            <li><strong>Visual Chaos:</strong> Too many simultaneous animations create cognitive overload</li>
+            <li><strong>Poor UX:</strong> Animations that hinder rather than enhance user interaction</li>
+        </ul>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,25 @@
+{
+  "name": "animation-best-practice",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "bad": "live-server --open=lab/bad-practices/index.html",
+    "good": "live-server --open=lab/good-practices/index.html",
+    "practices": "live-server --open=lab/practices/index.html"
+  },
+  "repository": {
+    "type": "git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/onja-org/animation-best-practice/issues"
+  },
+  "homepage": "https://github.com/onja-org/animation-best-practice#readme",
+  "devDependencies": {
+    "live-server": "^1.2.2"
+  }
+}

@@ -1,0 +1,510 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, sans-serif;
+
+    /* ❌ BAD PRACTICE: Distracting animated background
+     * WHY IT'S BAD:
+     * - Creates cognitive overload and makes content hard to read
+     * - Consumes unnecessary GPU resources continuously
+     * - Can cause motion sickness and eye strain
+     * - Violates accessibility guidelines (WCAG 2.1)
+     * - Unprofessional appearance that distracts from content
+     * - May trigger vestibular disorders in sensitive users
+     */
+    background: linear-gradient(45deg, #ff0000, #00ff00, #0000ff, #ff0000);
+    background-size: 400% 400%;
+    animation: rainbowBackground 1s linear infinite;
+
+    min-height: 100vh;
+    padding: 2rem;
+}
+
+/* ❌ BAD PRACTICE: Seizure-inducing background animation
+ * WHY IT'S BAD:
+ * - 1-second rapid animation can trigger photosensitive epilepsy
+ * - Violates WCAG 2.1 guidelines for seizure and physical reactions
+ * - Creates visual fatigue and reduces user focus
+ * - Constantly repaints the entire background, wasting CPU/GPU
+ * - No consideration for users with vestibular motion disorders
+ * - Linear timing function makes motion feel mechanical and jarring
+ */
+@keyframes rainbowBackground {
+    0% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+.container {
+    display: flex;
+    gap: 2rem;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.warning {
+    background: #ffebcc;
+    border: 2px solid #ff6b00;
+    padding: 1rem;
+    border-radius: 10px;
+    margin-bottom: 2rem;
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto 2rem auto;
+}
+
+/* ===== BAD PRACTICE CARD 1: PERFORMANCE KILLER ===== */
+.bad-card-1 {
+    background: white;
+    border-radius: 15px;
+    padding: 2rem;
+    width: 350px;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+
+    /* ❌ BAD PRACTICE: Animating layout-triggering properties
+     * WHY IT'S BAD:
+     * - Forces browser to recalculate layout (reflow) every frame
+     * - Triggers expensive composite layer creation and destruction
+     * - Causes janky animations and poor frame rates
+     * - Affects performance of entire page, not just this element
+     * - Width/height changes force surrounding elements to reposition
+     * - Should use transform instead for GPU acceleration
+     */
+    animation: badResize 2s ease-in-out infinite;
+
+    /* ❌ BAD PRACTICE: Extremely long transition duration
+     * WHY IT'S BAD:
+     * - 5-second transitions feel sluggish and unresponsive
+     * - Users expect UI feedback within 100-300ms
+     * - "all" transitions every property, causing unexpected behaviors
+     * - Can block user interactions during the long animation
+     * - Creates frustrating user experience with delayed feedback
+     */
+    transition: all 5s ease;
+}
+
+/* ❌ BAD PRACTICE: Layout-thrashing animation keyframes
+ * WHY IT'S BAD:
+ * - Animating width/height forces layout recalculation every frame
+ * - left/top properties cause expensive positioning calculations
+ * - border-width changes affect box model and trigger reflows
+ * - Color animations should use transform or opacity instead
+ * - Creates "layout thrashing" where browser constantly recalculates
+ * - Destroys performance especially on mobile devices
+ * - Should animate transform and opacity only for smooth 60fps
+ */
+@keyframes badResize {
+    0% {
+        width: 350px;
+        height: auto;
+        left: 0px;
+        top: 0px;
+        border-width: 1px;
+    }
+
+    50% {
+        width: 400px;
+        height: 200px;
+        left: 10px;
+        top: 10px;
+        border-width: 10px;
+        background-color: red;
+    }
+
+    100% {
+        width: 350px;
+        height: auto;
+        left: 0px;
+        top: 0px;
+        border-width: 1px;
+        background-color: white;
+    }
+}
+
+.bad-card-1:hover {
+    /* ❌ BAD PRACTICE: Multiple layout-breaking hover effects
+     * WHY IT'S BAD:
+     * - !important overrides are code smell indicating poor CSS architecture
+     * - Changing width/height on hover causes jarring layout shifts
+     * - Forces other elements to move unexpectedly (bad UX)
+     * - margin/padding changes compound the layout disruption
+     * - Multiple simultaneous changes create visual chaos
+     * - No smooth transition makes effect feel broken
+     * - Accessibility nightmare for users with motor impairments
+     */
+    width: 500px !important;
+    height: 300px !important;
+    margin: 50px;
+    padding: 50px;
+    border: 20px solid purple;
+    background-color: yellow;
+}
+
+.bad-card-1 h2 {
+    /* ❌ BAD PRACTICE: Distracting text animation
+     * WHY IT'S BAD:
+     * - Makes text impossible to read while animating
+     * - 0.5s duration is too fast, creates strobing effect
+     * - Constant motion prevents users from focusing on content
+     * - Violates readability principles and accessibility guidelines
+     * - Can trigger motion sensitivity and vestibular disorders
+     * - No semantic purpose - animation doesn't convey meaning
+     */
+    animation: textDance 0.5s linear infinite;
+    color: red;
+}
+
+/* ❌ BAD PRACTICE: Chaotic text movement animation
+ * WHY IT'S BAD:
+ * - Random-looking movements have no predictable pattern
+ * - Linear timing makes motion feel robotic and unnatural
+ * - Rotation makes text periodically unreadable
+ * - Excessive translateX values move text out of containers
+ * - Creates cognitive load as users can't predict text position
+ * - Impossible to read content while animation is running
+ */
+@keyframes textDance {
+    0% {
+        transform: translateX(-20px) rotate(-10deg);
+    }
+
+    25% {
+        transform: translateX(20px) rotate(10deg);
+    }
+
+    50% {
+        transform: translateX(-15px) rotate(-5deg);
+    }
+
+    75% {
+        transform: translateX(15px) rotate(5deg);
+    }
+
+    100% {
+        transform: translateX(-20px) rotate(-10deg);
+    }
+}
+
+/* ===== BAD PRACTICE CARD 2: ACCESSIBILITY NIGHTMARE ===== */
+.bad-card-2 {
+    background: white;
+    border-radius: 15px;
+    padding: 2rem;
+    width: 350px;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    position: relative;
+    overflow: hidden;
+}
+
+/* ❌ BAD PRACTICE: Seizure-inducing flash overlay
+ * WHY IT'S BAD:
+ * - 0.1s flashing interval can trigger photosensitive epilepsy
+ * - Violates WCAG 2.1 Level AA guidelines for seizures
+ * - Creates legal liability for accessibility violations
+ * - Rapid opacity changes consume excessive GPU resources
+ * - Covers all content making it periodically invisible
+ * - No user control to disable the effect
+ * - Bright color flashing is especially dangerous
+ */
+.bad-card-2::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(45deg, red, yellow, green, blue, purple);
+    animation: seizureFlash 0.1s linear infinite;
+    z-index: 1;
+}
+
+/* ❌ BAD PRACTICE: Ultra-fast flashing animation
+ * WHY IT'S BAD:
+ * - 10 flashes per second exceeds safe limits (max 3 per second)
+ * - Can cause seizures in people with photosensitive epilepsy
+ * - Creates accessibility barriers for neurotypical users too
+ * - Wastes battery life on mobile devices
+ * - Creates visual noise that interferes with content consumption
+ * - Linear timing makes flashing feel mechanical and harsh
+ */
+@keyframes seizureFlash {
+    0% {
+        opacity: 0;
+    }
+
+    50% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+    }
+}
+
+.bad-card-2>* {
+    position: relative;
+    z-index: 2;
+}
+
+/* ❌ BAD PRACTICE: Never-ending rotation
+ * WHY IT'S BAD:
+ * - Infinite rotation makes text unreadable most of the time
+ * - 3-second duration means text is upside-down for 1.5 seconds
+ * - Provides no functional benefit, pure visual noise
+ * - Causes motion sickness and eye strain
+ * - Linear timing creates unnatural mechanical rotation
+ * - No pause or stop state for users to read content
+ * - Violates principle that animations should enhance, not hinder UX
+ */
+.bad-card-2 h2 {
+    animation: neverEndingRotation 3s linear infinite;
+    color: #333;
+}
+
+@keyframes neverEndingRotation {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+/* ❌ BAD PRACTICE: Evil evasive button
+ * WHY IT'S BAD:
+ * - Actively prevents users from completing intended actions
+ * - Creates frustration and breaks fundamental UI expectations
+ * - Violates accessibility guidelines for motor impairments
+ * - Makes interface unusable for users with limited dexterity
+ * - Breaks the basic principle that UI should help, not hinder users
+ * - Could be seen as dark pattern or hostile design
+ * - Wastes user time and destroys trust in the interface
+ */
+.evil-button {
+    background: red;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    position: relative;
+    animation: dodgeUser 4s ease-in-out infinite;
+}
+
+/* ❌ BAD PRACTICE: Button that actively avoids user clicks
+ * WHY IT'S BAD:
+ * - Transforms helpful UI element into frustrating obstacle
+ * - Makes completion of user goals impossible
+ * - Particularly problematic for users with motor disabilities
+ * - Creates negative emotional response to the interface
+ * - Violates basic usability principle of predictable behavior
+ * - Could trigger accessibility lawsuits
+ */
+@keyframes dodgeUser {
+    0%, 100% {
+        transform: translateX(0px) translateY(0px);
+    }
+
+    25% {
+        transform: translateX(50px) translateY(-20px);
+    }
+
+    50% {
+        transform: translateX(-30px) translateY(30px);
+    }
+
+    75% {
+        transform: translateX(40px) translateY(-10px);
+    }
+}
+
+.evil-button:hover {
+    /* ❌ BAD PRACTICE: Even more evasive on hover
+     * WHY IT'S BAD:
+     * - Punishes users for attempting to interact
+     * - Faster animation makes targeting even more difficult
+     * - Scale change makes button harder to click when finally caught
+     * - Violates user expectation that hover indicates interactability
+     * - Creates learned helplessness - users give up on the interface
+     */
+    animation: dodgeUserFaster 1s ease-in-out infinite;
+}
+
+@keyframes dodgeUserFaster {
+    0%, 100% {
+        transform: translateX(0px) translateY(0px) scale(1);
+    }
+
+    50% {
+        transform: translateX(100px) translateY(-50px) scale(0.5);
+    }
+}
+
+/* ❌ BAD PRACTICE: Completely unreadable text animation
+ * WHY IT'S BAD:
+ * - Makes content completely inaccessible during animation
+ * - Constant scaling and rotation destroys readability
+ * - Opacity changes make text disappear entirely
+ * - Violates WCAG guidelines for text readability
+ * - No pause state allows users to actually read the content
+ * - Rotation and scaling trigger motion sensitivity issues
+ * - Information becomes effectively hidden from users
+ */
+.unreadable-text {
+    animation: unreadableMotion 2s ease-in-out infinite;
+    font-size: 14px;
+    color: #666;
+    margin-top: 1rem;
+}
+
+/* ❌ BAD PRACTICE: Text-destroying animation keyframes
+ * WHY IT'S BAD:
+ * - 0.5 scale makes text too small to read
+ * - 1.5 scale makes text too large and breaks layout
+ * - 0.3 opacity makes text nearly invisible
+ * - 360-degree rotation means text is upside-down 50% of time
+ * - Combined effects create completely unusable content
+ * - No consideration for users who need to actually read the text
+ */
+@keyframes unreadableMotion {
+    0% {
+        transform: scale(0.5) rotate(0deg);
+        opacity: 0.3;
+    }
+
+    25% {
+        transform: scale(1.5) rotate(90deg);
+        opacity: 1;
+    }
+
+    50% {
+        transform: scale(0.7) rotate(180deg);
+        opacity: 0.5;
+    }
+
+    75% {
+        transform: scale(1.3) rotate(270deg);
+        opacity: 0.8;
+    }
+
+    100% {
+        transform: scale(0.5) rotate(360deg);
+        opacity: 0.3;
+    }
+}
+
+/* Comment explaining problems */
+.problem-list {
+    background: #ffeeee;
+    border-left: 4px solid #ff0000;
+    padding: 1rem;
+    margin-top: 2rem;
+    font-size: 14px;
+    text-align: left;
+}
+
+.problem-list h4 {
+    color: #cc0000;
+    margin-bottom: 0.5rem;
+}
+
+.problem-list ul {
+    margin-left: 1rem;
+}
+
+.problem-list li {
+    margin-bottom: 0.5rem;
+    color: #333;
+}
+
+/* Make it responsive but still bad */
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    /* ❌ BAD PRACTICE: Making mobile experience even worse
+     * WHY IT'S BAD:
+     * - Mobile devices have less processing power for animations
+     * - Faster animations drain battery more quickly
+     * - Small screens make motion effects more disorienting
+     * - Touch interfaces require more precision, animations interfere
+     * - Mobile users often have less bandwidth and CPU resources
+     * - Should reduce animations on mobile, not intensify them
+     */
+    .bad-card-1,
+    .bad-card-2 {
+        animation-duration: 1s;
+        /* Making it worse on mobile */
+    }
+}
+
+/* ❌ BAD PRACTICE: Complete ignoring of accessibility preferences
+ * WHY IT'S BAD:
+ * - No @media (prefers-reduced-motion: reduce) query
+ * - Ignores user's explicit preference to reduce motion
+ * - Violates WCAG 2.1 Level AA accessibility requirements
+ * - Forces animations on users who find them harmful
+ * - Could trigger vestibular disorders, migraines, or seizures
+ * - Simple to implement but completely omitted
+ * - Legal requirement in many jurisdictions
+ * - Should disable or greatly reduce animations when requested
+ */
+
+/* WHAT'S MISSING - SHOULD BE INCLUDED:
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+} 
+*/
+
+/*
+ * ADDITIONAL BAD PRACTICES IN THIS CODE:
+ * 
+ * 1. NO SEMANTIC CONSIDERATION:
+ *    - Animations don't convey meaning or enhance understanding
+ *    - Pure decoration that actually hinders functionality
+ * 
+ * 2. PERFORMANCE DESTRUCTION:
+ *    - Constant repaints and reflows
+ *    - GPU memory waste with unnecessary composite layers
+ *    - Battery drain on mobile devices
+ *    - Makes entire page feel sluggish
+ * 
+ * 3. USABILITY VIOLATIONS:
+ *    - Breaks fundamental UI expectations
+ *    - Makes content inaccessible
+ *    - Creates cognitive overload
+ *    - Prevents task completion
+ * 
+ * 4. ACCESSIBILITY DISASTERS:
+ *    - Ignores WCAG guidelines
+ *    - Could trigger medical conditions
+ *    - No user control over animations
+ *    - Violates keyboard navigation patterns
+ * 
+ * 5. DESIGN ANTI-PATTERNS:
+ *    - Form follows dysfunction rather than function
+ *    - Prioritizes "flashiness" over user needs
+ *    - Creates hostile user experience
+ *    - Violates principle of least surprise
+ */
