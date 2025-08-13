@@ -58,11 +58,19 @@ A button with the following specifications:
    - Add `transform: translateY(-3px)`
    - Add box-shadow: `0 4px 8px rgba(0,0,0,0.2)`
 
+4. Check video bellow and compare to your result
+
+<video width="640" height="360" controls>
+  <source src="./video/hover-button.mp4" type="video/mp4" />
+</video>
+
+
 ### ✅ Success Criteria
 - Button color changes smoothly on hover
 - Button lifts up with shadow effect
 - Animation reverses when hover ends
 - Total animation feels smooth and natural
+
 
 ### 💡 Common Mistakes to Avoid
 - Don't forget the transition property on the base element
@@ -109,6 +117,12 @@ A box with these specifications:
 4. **Test the animation:**
    - Refresh the page to see the effect
    - Box should start invisible and above, then drop with a bounce
+
+5. **Compare your result to the video bellow**
+
+<video width="640" height="360" controls>
+  <source src="./video/red-box.mp4" type="video/mp4" />
+</video>
 
 ### ✅ Success Criteria
 - Box starts invisible and positioned above final location
@@ -163,13 +177,20 @@ A button featuring:
    - Use `animation: slideInScale 0.8s ease-out;`
 
 #### Part C: Hover Effects (5 minutes)
-4. **Add smooth transitions:**
+4. **Add smooth transitions to super button:**
    - `transition: all 0.3s ease;`
 
 5. **Create hover effects:**
    - Scale: `transform: scale(1.05);`
    - Glow: `box-shadow: 0 8px 20px rgba(255, 107, 107, 0.4);`
    - Brightness: `filter: brightness(1.1);`
+6. **Compare your result to the video bolow**
+
+<video width="640" height="360" controls>
+  <source src="./video/orange.mp4" type="video/mp4" />
+</video>
+
+
 
 ### ✅ Success Criteria
 - Button slides in from left while growing on page load
@@ -187,15 +208,15 @@ Add a subtle pulse animation that runs continuously:
 ```
 Apply with: `animation: slideInScale 0.8s ease-out, pulse 2s ease-in-out infinite 1s;`
 
----
-
-## Exercise 4: Card Animation Challenge
+# Exercise 4: Card Animation Challenge
 **⏰ Time: 10 minutes**
 
-### 🎯 Objective
+---
+
+## 🎯 Objective
 Create a complete animated card component that demonstrates all learned concepts plus accessibility.
 
-### 📝 What Students Need to Create
+## 📝 What Students Need to Create
 An animated card with:
 - Card entrance animation from bottom
 - Icon rotation on hover
@@ -203,7 +224,7 @@ An animated card with:
 - Interactive button
 - Accessibility support
 
-### 🛠️ HTML Structure Needed
+## 🛠️ HTML Structure Needed
 ```html
 <div class="challenge-card">
     <div class="card-icon">🚀</div>
@@ -213,63 +234,146 @@ An animated card with:
 </div>
 ```
 
-### 📋 Step-by-Step Tasks
+## 📋 Step-by-Step Tasks
 
-#### Part A: Card Base & Entrance (4 minutes)
-1. **Style the card:**
+### Part A: Card Base & Entrance (4 minutes)
+
+#### 1. **Style the card:**
    - Background: white
    - Padding: 2rem
    - Border-radius: 15px
    - Box-shadow: `0 4px 15px rgba(0,0,0,0.1)`
    - Max-width: 300px
-   - Center with margin auto
+   - Center with `margin: 0 auto`
+   - Text-align: center
+   - Add smooth transitions with `transition: all 0.3s ease`
 
-2. **Create card entrance:**
-   - **fadeInUp keyframes:** Start with `opacity: 0; transform: translateY(30px) scale(0.9);`
-   - End with `opacity: 1; transform: translateY(0) scale(1);`
-   - Apply: `animation: fadeInUp 0.8s ease-out;`
+#### 2. **Create card entrance animation:**
+   - Create **fadeInUp keyframes:** 
+     - **0%:** `opacity: 0; transform: translateY(30px) scale(0.9);`
+     - **100%:** `opacity: 1; transform: translateY(0) scale(1);`
+   - Apply to card: `animation: fadeInUp 0.8s ease-out;`
 
-#### Part B: Interactive Effects (4 minutes)
-3. **Card hover effects:**
-   - Transition: `all 0.3s ease;`
-   - Hover: `transform: translateY(-8px); box-shadow: 0 15px 30px rgba(0,0,0,0.2);`
+### Part B: Interactive Effects (4 minutes)
 
-4. **Icon animation:**
+#### 3. **Card hover effects:**
+   - On hover: `transform: translateY(-8px);`
+   - On hover: `box-shadow: 0 15px 30px rgba(0,0,0,0.2);`
+
+#### 4. **Icon styling and animation:**
+   - Font-size: 3rem
+   - Margin-bottom: 1rem
+   - Add smooth transitions with `transition: all 0.3s ease`
+   - **IMPORTANT:** Icon rotates only when **card** is hovered (use `.challenge-card:hover .card-icon`)
    - On card hover: `transform: rotate(10deg) scale(1.1);`
-   - Transition: `0.3s ease;`
 
-5. **Button styling:**
+#### 5. **Button styling:**
+   - Padding: 12px 24px
    - Background: #007bff
-   - Hover: darker blue + small scale
+   - White text, no border
+   - Border-radius: 8px
+   - Font-size: 14px, font-weight: bold
+   - Cursor: pointer
+   - Add smooth transitions with `transition: all 0.3s ease`
+   - On hover: background changes to #0056b3
+   - On hover: `transform: scale(1.05)`
+   - On hover: `box-shadow: 0 4px 8px rgba(0,0,0,0.2)`
 
-#### Part C: Accessibility (2 minutes)
-6. **Add reduced motion support:**
-```css
-@media (prefers-reduced-motion: reduce) {
-    * {
-        animation-duration: 0.01ms !important;
-        animation-iteration-count: 1 !important;
-        transition-duration: 0.01ms !important;
-    }
-}
-```
+### Part C: Accessibility (2 minutes)
 
-### ✅ Success Criteria
-- Card animates in smoothly from bottom
-- Hover effects work on card and button
-- Icon rotates when card is hovered
-- Accessibility media query is included
-- All animations feel coordinated
+#### 6. **Add reduced motion support:**
+   - Create media query for `(prefers-reduced-motion: reduce)`
+   - Target all elements with `*`
+   - Set `animation-duration: 0.01ms !important`
+   - Set `animation-iteration-count: 1 !important`
+   - Set `transition-duration: 0.01ms !important`
 
-### 🌟 Final Challenge: Staggered Animations
-Make elements appear with delays:
-- Card: no delay
-- Icon: 0.2s delay
-- Title: 0.4s delay
-- Text: 0.6s delay
-- Button: 0.8s delay
+## 🌟 Final Challenge: Staggered Animations
 
-Use `animation-delay` property for each element.
+Create a cascade effect where elements appear one after another:
+
+#### **Animation Sequence:**
+- **Card:** no delay → `animation: fadeInUp 0.8s ease-out;`
+- **Icon:** 0.2s delay → `animation: fadeInUp 0.8s ease-out 0.2s both;`
+- **Title (h3):** 0.4s delay → `animation: fadeInUp 0.8s ease-out 0.4s both;`
+- **Text (p):** 0.6s delay → `animation: fadeInUp 0.8s ease-out 0.6s both;`
+- **Button:** 0.8s delay → `animation: fadeInUp 0.8s ease-out 0.8s both;`
+
+#### **Style the text elements:**
+- **h3:** Color: #2c3e50, margin-bottom: 1rem
+- **p:** Color: #7f8c8d, line-height: 1.6, margin-bottom: 1.5rem
+
+**Critical:** Use `both` keyword for delayed animations to keep elements invisible until their animation starts.
+
+<video width="640" height="360" controls>
+  <source src="./video/card-robot.mp4" type="video/mp4" />
+</video>
+
+## ✅ Success Criteria
+- ✅ Card animates in smoothly from bottom with scale effect
+- ✅ Card lifts up and shows enhanced shadow on hover
+- ✅ Icon rotates and scales **only** when card is hovered (not always)
+- ✅ Button has proper color (#007bff) and hover effects (#0056b3)
+- ✅ Elements appear with staggered delays (0.2s, 0.4s, 0.6s, 0.8s intervals)
+- ✅ Text elements have proper colors and spacing
+- ✅ Accessibility media query is included for reduced motion
+- ✅ All animations feel coordinated and professional
+
+## 💡 Key Teaching Points
+
+### **Performance Best Practices:**
+- Always use `transform` for movement (translateY, scale, rotate)
+- Use `opacity` for fade effects
+- Avoid animating `top`, `left`, `margin`, `width`, or `height`
+
+### **Animation Timing:**
+- Entrance animations: 0.8s (natural feeling)
+- Hover transitions: 0.3s (responsive feeling)
+- Staggered delays: 0.2s intervals (creates rhythm)
+
+### **Selector Importance:**
+- `.card-icon` styles the icon always
+- `.challenge-card:hover .card-icon` styles icon only when card is hovered
+
+### **Animation Fill Modes:**
+- `both` applies keyframe styles before and after animation
+- Essential for staggered animations to prevent flash of unstyled content
+
+### **Accessibility Considerations:**
+- Always include `prefers-reduced-motion` media query
+- Respect users who prefer less motion
+- Test with reduced motion settings enabled
+
+## 🚨 Common Mistakes to Avoid
+
+❌ **Icon Animation Mistakes:**
+- Don't make icon always rotated
+- Don't use wrong selector (`icon:hover` instead of `card:hover icon`)
+
+❌ **Color Mistakes:**
+- Don't use wrong button color (#3498db instead of #007bff)
+- Don't use generic color names (darkblue instead of #0056b3)
+
+❌ **Animation Mistakes:**
+- Don't forget `animation-fill-mode: both` for delayed animations
+- Don't use fixed positioning or margins for movement
+- Don't forget the accessibility media query
+- Don't skip styling the h3 and p elements
+
+❌ **Layout Mistakes:**
+- Don't use fixed widths that break on mobile
+- Don't forget to center the card properly
+
+## 🎯 Testing Your Work
+
+1. **Refresh the page** - All elements should appear in sequence
+2. **Hover over the card** - Should lift with shadow, icon should rotate
+3. **Hover over the button** - Should change color and scale slightly
+4. **Check accessibility** - Enable "Reduce motion" in browser settings
+
+---
+
+**🎉 End Result:** A professional animated card component that demonstrates smooth entrance animations, coordinated hover effects, and accessibility best practices!
 
 ---
 
@@ -305,7 +409,7 @@ Use `animation-delay` property for each element.
 - `animation: name duration timing-function delay iteration-count;`
 - `transform: translateX() translateY() scale() rotate();`
 - `animation-delay: time;`
-- `animation-fill-mode: forwards;`
+- `animation-fill-mode: both;`
 
 ### Performance-Friendly Properties
 ✅ **Good:** `transform`, `opacity`, `box-shadow`, `filter`  

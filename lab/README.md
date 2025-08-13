@@ -9,7 +9,7 @@ There are 3 subfolder inside of lab folders :
 - `good practices`
 - `practices`
 
-All free subfolders have : 
+All three subfolders have : 
 - `index.html`
 - `styles.css`
 
@@ -31,5 +31,3 @@ All free subfolders have :
 - Open the `practices` folder.
 - Read instructons.md to understand your task.
 - Edit both `index.html` and `styles.css` to apply the concepts you’ve learned.
-
-

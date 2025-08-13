@@ -11,7 +11,9 @@ cd animation-best-practice
 ### 2. Run the code 
 
 ``` 
- npm run live 
+ npm run bad
+ npm run good
+ npm run practices
 
  ``` 
 
