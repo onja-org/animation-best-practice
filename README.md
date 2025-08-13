@@ -32,6 +32,7 @@ lab/
 │   ├── 📄 index.html
 │   └── 🎨 styles.css
 ├── practices/
+│   ├── video
 │   ├── 📄 index.html
 │   ├── 📝 instructions.md
 │   └── 🎨 styles.css
